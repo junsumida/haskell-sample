@@ -9,7 +9,7 @@ category:            Web
 build-type:          Simple
 cabal-version:       >=1.8
 
-executable todo
+executable datastreamer
   main-is:             Main.hs
   -- other-modules:       
   build-depends:       base ==4.7.*
@@ -18,15 +18,17 @@ executable todo
                      , http-types
                      , resourcet
                      , conduit-extra
+                     , containers
+                     , aeson
                      , scotty == 0.9.*
                      , text
                      , bytestring
                      , blaze-html
-                     , persistent ==2.*
+                     , persistent == 2.*
                      , persistent-template ==2.*
                      , persistent-sqlite ==2.*
                      , persistent-postgresql ==2.1.*
-                     , monad-logger ==0.3.*
+                     , monad-logger
                      , heroku
                      , transformers
                      , wai-middleware-static
