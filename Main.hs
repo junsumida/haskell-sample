@@ -13,7 +13,7 @@ instance ToJSON Person where
   toJSON (Person name job) =
     object [ "name" .= name, "job" .= job]
 
-main = scotty 3000 $ do
+main = scotty 80 $ do
   get "/" $ do
     html "Hello World!"
 
