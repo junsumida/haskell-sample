@@ -1,5 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Web.Scotty as WSC
+import System.Environment
+import Control.Monad
 import Data.Monoid
 import Data.Aeson
 import Data.Map
@@ -13,18 +15,19 @@ instance ToJSON Person where
   toJSON (Person name job) =
     object [ "name" .= name, "job" .= job]
 
-main = scotty 80 $ do
-  get "/" $ do
-    html "Hello World!"
-
-  get "/me" $ do
-    WSC.json (Person "junsumida" "software engineer")
-
-  get "/word/:word" $ do
-    beam <- param "word"
-    html $ mconcat ["<h1>Scotty, ", beam, " me up!</h1>"]
-
-  -- 404
-  notFound $ do
-    text "there is no such route."
-
+main :: IO ()
+main = do
+  port <- liftM read $ getEnv "PORT"
+  scotty port $ do
+    get "/" $ do
+      html "Hello World!"
+  
+    get "/me" $ do
+      WSC.json (Person "junsumida" "software engineer")
+  
+    get "/word/:word" $ do
+      beam <- param "word"
+      html $ mconcat ["<h1>Scotty, ", beam, " me up!</h1>"]
+  
+    notFound $ do
+      text "there is no such route."
