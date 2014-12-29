@@ -1,4 +1,4 @@
-dist/
+dist/dist-sandbox*
 .cabal-sandbox/
 .idea/
 run
